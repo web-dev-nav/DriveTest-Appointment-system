@@ -7,13 +7,13 @@ Mainly entire application consists of following parts:
 3. Admin (a person who adds schedules and other stuff in the portal)
 
 # Setup
-1 Find the `dir` and open in `vs code`
-2 Open terminal and type `npm install`
-3 Setup mongodb [here](https://account.mongodb.com/account/login) and create cluster 
-4 Download MongoDB compass and enter connection to test.
-5 open `db/db.js` and add connection string.
-6 Now get back to terminal and type `npm run start`
-7 Last, open localhost:4000 to test the application in browser
+1. Find the `dir` and open in `vs code`
+2. Open terminal and type `npm install`
+3. Setup mongodb [here](https://account.mongodb.com/account/login) and create cluster 
+4. Download MongoDB compass and enter connection to test.
+5. open `db/db.js` and add connection string.
+6. Now get back to terminal and type `npm run start`
+7. Last, open localhost:4000 to test the application in browser
 
 # Login
 ![1](https://github.com/web-dev-nav/DriveTest-Appointment-system/assets/110724391/d0b32b34-e021-447b-94af-7bc55dceb115)
