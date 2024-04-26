@@ -1,4 +1,5 @@
 # DriveTest-Appointment-system
+Small appointment application built in Express and Nodejs. 
 Mainly entire application consists of following parts:
 
 1. Driver Interface (a person who wants to take G2/G license)
