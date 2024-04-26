@@ -13,6 +13,9 @@ Mainly entire application consists of following parts:
 *![driver1](https://github.com/web-dev-nav/DriveTest-Appointment-system/assets/110724391/428e9679-1c39-4de0-8191-523f99ebd8fb)
 
 # Examiner
-
 ![exam](https://github.com/web-dev-nav/DriveTest-Appointment-system/assets/110724391/92fe8565-2cfa-4e14-a50d-dd6a29f686f5)
 ![exam1](https://github.com/web-dev-nav/DriveTest-Appointment-system/assets/110724391/517d44a1-03f8-4430-ad4d-d9649b5820fb)
+
+# Admin
+![admin](https://github.com/web-dev-nav/DriveTest-Appointment-system/assets/110724391/0ccfbbff-945c-4308-8686-65063c5d8d8b)
+![admin1](https://github.com/web-dev-nav/DriveTest-Appointment-system/assets/110724391/cc9d98cb-2e88-4ca8-8d28-8269e4a4c9c2)
