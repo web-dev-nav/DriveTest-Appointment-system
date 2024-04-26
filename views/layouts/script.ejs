@@ -1,0 +1,149 @@
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script>
+ // Function to fetch existing appointments using AJAX
+function fetchExistingAppointments(selectedDate) {
+  $.get(`/existing-appointments?date=${selectedDate}`, function (data) {
+    // Enable all checkboxes
+    $('input[name="selectedTimes"]').prop('disabled', false);
+
+    if (data.length > 0) {
+      // Disable checkboxes based on existing appointments
+      data.forEach(timeSlot => {
+        const checkbox = $(`input[value='${timeSlot.value}']`);
+        if (checkbox.length && !timeSlot.isAvailable) {
+          checkbox.prop('disabled', true);
+        }
+      });
+    }
+  })
+  .fail(function () {
+    console.error('Failed to fetch existing appointments.');
+    
+    // Enable all checkboxes when there is an error (no response from the server)
+    $('input[name="selectedTimes"]').prop('disabled', false);
+  });
+}
+
+// Event handler when date changes
+$('#date').change(function () {
+  const selectedDate = $(this).val();
+  if (selectedDate) {
+    fetchExistingAppointments(selectedDate);
+  } else {
+    // Enable all checkboxes when no date is selected
+    $('input[name="selectedTimes"]').prop('disabled', false);
+  }
+});
+
+
+ // Function to fetch existing appointments for new timeslots using AJAX
+function fetchNewExistingAppointments(selectedDate) {
+  $.get(`/existing-appointments?date=${selectedDate}`, function (data) {
+    // Enable all options in the newTimeslot select
+    $('#newTimeslot option').prop('disabled', false);
+
+    // Clear existing options
+    $('#newTimeslot').empty();
+
+    if (data.length > 0) {
+      // Populate and disable options based on existing appointments
+      data.forEach(timeSlot => {
+        if (!timeSlot.isAvailable && timeSlot.isbooked) {
+          const option = $(`<option value='${timeSlot.value}'>${timeSlot.value}</option>`); 
+          $('#newTimeslot').append(option);
+        }
+      
+       
+      });
+    } else {
+      // If no existing appointments, enable all options
+      $('#newTimeslot').append('<option value="" selected>No available timeslots</option>');
+    }
+  })
+  .fail(function () {
+    console.error('Failed to fetch existing appointments.');
+
+    // Enable all options when there is an error (no response from the server)
+    $('#newTimeslot option').prop('disabled', false);
+  });
+}
+
+// Event handler when date changes
+$('#newDate').change(function () {
+  const selectedDate = $(this).val();
+  if (selectedDate) {
+    fetchNewExistingAppointments(selectedDate);
+  } 
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+    // Event listener for details button click
+    $('.details-btn').click(function () {
+        // Get the data-details attribute value
+        const details = $(this).data('details');     
+        // Access the data directly without parsing
+        const data = details;
+
+        // Update modal content based on the data
+        $('#modalTitle').text(`Details for ${data.slot.value}`);
+        $('#modalBody').html(`
+            <h4>Driver Details:</h4>
+            <p>
+              User: ${data.userDetail.firstName} ${data.userDetail.lastName}<br>
+              Time: ${data.slot.value} on ${data.appointment.date} <br>
+              Test Type: ${data.slot.TestType}<br>
+              Age: ${data.userDetail.age}</p>
+
+            <h4>Car Details:</h4>
+            <p>
+               Make: ${data.userDetail.car_details.make}<br>
+               Model: ${data.userDetail.car_details.model}<br>
+               Year: ${data.userDetail.car_details.year}<br>
+               Plate NO: ${data.userDetail.car_details.platno}<br>  
+            </p>
+            
+            ${(data.slot.status !== '' && data.slot.status !== '0') ? `
+              <h4>Status details:</h4>
+              <p>
+                Status: <span class="badge bg-primary">${data.slot.status}</span><br>
+                Comment: ${data.slot.comment}<br>
+              </p>` : ''}
+
+            <form action="/updateDriverstatus" method="POST">
+                <input type="hidden" value="${data.appointment.date}" name="providedDate">
+                <input type="hidden" value="${data.userDetail.susername}" name="susername">
+                <input type="hidden" value="${data.slot.value}" name="slot">
+                    <div class="mb-3">
+                        <label for="selectOption" class="form-label">Select Option</label>
+                        <select class="form-select" id="selectOption" name="status">
+                            <option >Select status</option>
+                            <option value="Ready">Ready</option>
+                            <option value="Fail">Fail</option> 
+                            <option value="Passed">Passed</option> 
+                            <option value="Hold">Hold</option> 
+                        </select>
+                    </div>
+                    
+                    <!-- Text field for comments -->
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Comments</label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Add something to remember..."></textarea>
+                    </div>
+
+                    <!-- Add a submit button -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        `);
+    });
+});
+
+</script>

@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "client-sessions": "^0.8.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.0.1",
+    "moment-timezone": "^0.5.43",
+    "mongoose": "^7.6.0"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "name": "navjot",
+  "version": "1.0.0",
+  "description": "navjot project",
+  "main": "app.js",
+  "author": "Navjot Singh",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Head-->
+<%- include('layouts/head'); %>
+
+    <body>
+        <main>
+            <!-- Navigation -->
+            <%- include('layouts/nav'); %>
+                <!-- Header Banner-->
+                <%- include('layouts/header'); %>
+                    <!-- Main Content-->
+                    <div class="container mt-5">
+
+                        <!-- Personal Information Section -->
+                        <% if (typeof success !=='undefined' ) { %>
+                            <div class="alert alert-success" role="alert">
+                                <%= success.message %>
+                            </div>
+                            <% } %>
+                                <% if(typeof error !=='undefined' ) { %>
+                                    <div class="alert alert-danger" role="alert">
+                                        <%= error.message %>
+                                    </div>
+                                    <% } %>
+
+                                    <% if (typeof AppointList !== 'undefined' && AppointList !== null) { %>
+                                        <div class="card mt-4 mb-4">
+                                            <div class="card-header">
+                                                Driver appointment list
+                                            </div>
+
+                                            <div class="card-body">
+
+                                                <!-- Responsive Bootstrap Table -->
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Name</th>
+                                                                <th>Username</th>
+                                                                <th>Appointment Time</th>
+                                                                <th>Appointment Type</th>
+                                                                <th>Details</th>
+                                                                <!-- Add more table headers as needed -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                    
+                                                            <% let rowNum=1; %>
+                                                                <% for(let i=0; i < AppointList.length; i++) { %>
+                                                                    <% const appointment=AppointList[i]; %>
+                                                                        <% for(let j=0; j < appointment.time.length;
+                                                                            j++) { %>
+                                                                            <% const slot=appointment.time[j]; %>
+                                                                                <% if (slot.isAvailable===false &&
+                                                                                    slot.isbooked===false && slot.bookby
+                                                                                    !==null) { %>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <%= rowNum++ %>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <!-- Display user details for this slot -->
+                                                                                            <% const
+                                                                                                userDetail=appointment.userDetails.find(user=>
+                                                                                                user.susername ===
+                                                                                                slot.bookby); %>
+                                                                                                <% if (userDetail) { %>
+                                                                                                    <%= `${userDetail.firstName}
+                                                                                                        ${userDetail.lastName}`
+                                                                                                        %>
+                                                                                                        <% } else { %>
+                                                                                                            <!-- Handle the case when user details are not found -->
+                                                                                                            User details
+                                                                                                            not
+                                                                                                            available
+                                                                                                            <% } %>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <%= slot.bookby %>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <%= slot.value %> On Date:
+                                                                                                <%= appointment.date
+                                                                                                    %>
+                                                                                        </td>
+                                                                                        <td><span
+                                                                                                class="badge bg-warning">
+                                                                                                <%= slot.TestType %>
+                                                                                            </span></td>
+                                                                                        <td>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-sm btn-primary details-btn"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#myModal"
+                                                                                                data-details='<%= JSON.stringify({ userDetail, slot, appointment }) %>'>
+                                                                                                Details
+                                                                                            </button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <% } %>
+                                                                                        <% } %>
+                                                                                            <% } %>
+                                                                                                                        
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- End Responsive Bootstrap Table -->
+
+                                            </div>
+                                        </div>
+
+                                        <% } %>
+
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="modalTitle">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalBody">
+                                    <!-- Content will be dynamically updated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </main>
+        <!-- Footer-->
+        <%- include('layouts/footer'); %>
+            <!-- Js scripts -->
+            <%- include('layouts/script'); %>
+    </body>
+
+</html>

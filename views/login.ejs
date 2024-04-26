@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+     <!--Head-->
+    <%- include('layouts/head'); %>
+    <body>
+        <main>
+             <!-- Navigation -->
+            <%- include('layouts/nav'); %>
+             <!-- Header Banner-->
+            <%- include('layouts/header'); %>
+            <!-- Main Content-->
+            <div class="container">
+                <div class="row justify-content-center">
+                    <% if(typeof error !=='undefined' ) { %>
+                        <p class="alert alert-danger text-center">
+                            <%= error.message %>
+                        </p>
+                    <% } %>
+                    <% if(typeof success !=='undefined' ) { %>
+                        <p class="alert alert-success text-center">
+                            <%= success.message %>
+                        </p>
+                    <% } %>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Login Form -->
+                
+                                <h4 class="card-title">Login</h4>
+                                <form action="/auth" method="post">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="loginPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Enter your password" >
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+       
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Sign Up Form -->
+                                <h4 class="card-title">Sign Up</h4>
+                                <form action="/signup" method="post" id="signup-form">
+                                    <div class="mb-3">
+                                        <label for="susername" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="susername" name="susername" placeholder="Enter your username" >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="retype-pass" class="form-label">Re-enter Password</label>
+                                        <input type="password" class="form-control" id="retype-pass" name="retype-pass" placeholder="Enter your repassword" >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="type" class="form-label">User Type</label>
+                                         <select class="form-control" id="type" name="userType">
+                                            <option value="Driver">Driver</option>
+                                            <option value="Examiner">Examiner</option>
+                                            <option value="Admin">Admin</option>
+                                          </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+     </main> 
+      <!-- Footer-->
+        <%- include('layouts/footer'); %>
+      <!-- Js scripts -->
+       <%- include('layouts/script'); %>
+    </body>
+</html>

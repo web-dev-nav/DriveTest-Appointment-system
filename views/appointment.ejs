@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Head-->
+<%- include('layouts/head'); %>
+
+    <body>
+        <main>
+            <!-- Navigation -->
+            <%- include('layouts/nav'); %>
+                <!-- Header Banner-->
+                <%- include('layouts/header'); %>
+                    <!-- Main Content-->
+                    <div class="container mt-5">
+                        <form action="/appointmentsave" method="POST">
+                            <!-- Personal Information Section -->
+                            <% if (typeof success !== 'undefined') { %>
+                                <div class="alert alert-success" role="alert">
+                                  <%= success.message %>
+                                </div>
+                              <% } %>
+                                    <% if(typeof error !=='undefined' ) { %>
+                                        <div class="alert alert-danger" role="alert">
+                                            <%= error.message %>
+                                        </div>
+                                        <% } %>
+
+                                            <div class="card mt-4">
+                                                <div class="card-header">
+                                                    Create Appointment Slots
+                                                </div>
+
+                                                <div class="card-body">
+
+                                                    <div class="form-group">
+                                                        <label for="date">Appointment Date</label>
+                                                        <input type="date" id="date" name="date" class="form-control">
+                                                    </div>
+                                                    <!-- Display timeSlots in a Bootstrap list group -->
+                                                    <ul class="list-group mt-2 text-center">
+                                                        <% if(typeof timeSlots !=='undefined' ) { %>   
+                                                            <% timeSlots.forEach(time=> { %>
+                                                            
+                                                                <li class="list-group-item d-flex justify-content-center">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" name="selectedTimes" value="<%= time %>" id="<%= time %>">
+                                                                        <label class="form-check-label" for="<%= time %>">
+                                                                        <%= time %>
+                                                                        </label>
+                                                                    </div>
+                                                                </li>
+                                                                <% }); %>
+                                                        <% } %>
+                                                    </ul>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="mt-4 mb-2">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                        </form>
+                    </div>
+
+        </main>
+        <!-- Footer-->
+        <%- include('layouts/footer'); %>
+            <!-- Js scripts -->
+            <%- include('layouts/script'); %>
+    </body>
+
+</html>

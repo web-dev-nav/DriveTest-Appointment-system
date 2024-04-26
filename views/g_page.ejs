@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Head-->
+<%- include('layouts/head'); %>
+
+    <body>
+        <main>
+            <!-- Navigation -->
+            <%- include('layouts/nav'); %>
+                <!-- Header Banner-->
+                <%- include('layouts/header'); %>
+                    <!-- Main Content-->
+
+                    <div class="container mt-5 mb-5">
+                        <div class="card mx-auto">
+                            <div class="card-body">
+
+                                <% if (typeof result !=='undefined' ) { %>
+                                    <div class="alert alert-info" role="alert">
+                                        <%- result %>
+                                    </div>
+                                    <% } %>
+
+                                        <% if(typeof success !=='undefined' ) { %>
+                                            <div class="alert alert-success" role="alert">
+                                                <%= success %>
+                                            </div>
+                                            <% } %>
+
+
+                                                <% if(typeof appointments !=='undefined' ) { %>
+
+                                                    <div class="alert alert-info" role="alert">
+                                                        <h2>Examinar comment:</h2>
+                                                        <% if (appointments.length> 0) { %>
+                                                            <ul>
+                                                                <% appointments.forEach(appointment=> { %>
+                                                                    <li>
+                                                                        <strong>Date:</strong>
+                                                                        <%= appointment.date %><br>
+                                                                            <strong>Time Slots:</strong>
+                                                                            <ul>
+                                                                                <% appointment.time.forEach(slot=> { %>
+                                                                                    <li>
+                                                                                        <strong>Appointment
+                                                                                            time:</strong>
+                                                                                        <%= slot.value %><br>
+                                                                                            <strong>Status:</strong>
+                                                                                            <%= slot.status %><br>
+                                                                                                <strong>Comment:</strong>
+                                                                                                <%= slot.comment %><br>
+                                                                                                    <!-- Add more details as needed -->
+                                                                                    </li>
+                                                                                    <% }); %>
+                                                                            </ul>
+                                                                    </li>
+                                                                    <% }); %>
+                                                            </ul>
+                                                            <% } else { %>
+                                                                <p>No appointments found.</p>
+                                                                <% } %>
+
+
+                                                    </div>
+                                                    <% } %>
+
+                                                        <!-- Display user information or "No User Found" message -->
+                                                        <!-- User Information Section -->
+                                                        <div class="user-info-section">
+                                                            <!-- Display user information and car information -->
+                                                            <% if(typeof user !=='undefined' ) { %>
+                                                                <h2>User Information</h2>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <ul class="list-group">
+                                                                            <li class="list-group-item">
+                                                                                <strong>First Name:</strong>
+                                                                                <%= user.firstName %>
+                                                                            </li>
+                                                                            <li class="list-group-item">
+                                                                                <strong>Last Name:</strong>
+                                                                                <%= user.lastName %>
+                                                                            </li>
+                                                                            <li class="list-group-item">
+                                                                                <strong>License Number:</strong>
+                                                                                <%= user.licenseNumber %>
+                                                                            </li>
+                                                                            <li class="list-group-item">
+                                                                                <strong>Age:</strong>
+                                                                                <%= user.age %>
+                                                                            </li>
+                                                                            <li class="list-group-item">
+                                                                                <strong>Date of Birth:</strong>
+                                                                                <%= user.dob %>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <ul class="list-group">
+                                                                            <form action="/updatecarinfo" method="POST">
+                                                                                <li class="list-group-item">
+                                                                                    <div class="form-group">
+                                                                                        <label for="make">Make</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="make" name="make"
+                                                                                            value="<%= user.car_details.make %>">
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <div class="form-group">
+                                                                                        <label for="model">Model</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="model" name="model"
+                                                                                            value="<%= user.car_details.model %>">
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <div class="form-group">
+                                                                                        <label for="year">Year</label>
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            id="year" name="year"
+                                                                                            value="<%= user.car_details.year %>">
+                                                                                    </div>
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <div class="form-group">
+                                                                                        <label for="plateno">Plate
+                                                                                            Number</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="plateno" name="plateno"
+                                                                                            value="<%= user.car_details.platno %>"
+                                                                                            placeholder="ex: AA12AAA">
+                                                                                    </div>
+                                                                                </li>
+
+
+                                                                                <!-- Save button to update car information -->
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary mt-2">Update
+                                                                                    Car Info</button>
+                                                                            </form>
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+                                                                    <a href="/g2"
+                                                                        class="btn btn-primary btn-block mt-2">Back to
+                                                                        G2 page</a>
+                                                                    <% if(typeof error !=='undefined' ) { %>
+                                                                        <p class="text-danger text-center">
+                                                                            <%= error.message %>
+                                                                        </p>
+                                                                        <% } %>
+
+                                                        </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+        </main>
+        <!-- Footer-->
+        <%- include('layouts/footer'); %>
+            <!-- Js scripts -->
+            <%- include('layouts/script'); %>
+    </body>
+
+</html>

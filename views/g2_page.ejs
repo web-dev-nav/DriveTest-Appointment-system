@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Head-->
+<%- include('layouts/head'); %>
+
+    <body>
+        <main>
+            <!-- Navigation -->
+            <%- include('layouts/nav'); %>
+                <!-- Header Banner-->
+                <%- include('layouts/header'); %>
+                    <!-- Main Content-->
+                    <div class="container mt-5">
+                        <form action="/saveformdata" method="POST">
+                            <!-- Personal Information Section -->
+                            <% if(typeof success !=='undefined' ) { %>
+                                <div class="alert alert-success" role="alert">
+                                    <%= success %>
+                                </div>
+                                <% } %>
+                                    <% if(typeof error !=='undefined' ) { %>
+                                        <div class="alert alert-danger" role="alert">
+                                            <%= error.message %>
+                                        </div>
+                                        <% } %>
+
+                                        <div class="card mt-4">
+                                            <div class="card-header">
+                                                Book a Slot
+                                            </div>
+                                        
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="dob">Select date</label>
+                                                            <input type="date" class="form-control" id="newDate" name="newDate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="timeslot">Select Time slot</label>
+                                                        <select class="form-control" id="newTimeslot" name="newSelectedTimes">
+                                                          <option value="" selected disabled>Select a date first</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card mt-4">
+                                            <div class="card-header">
+                                                Test Type
+                                            </div>
+                                        
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label for="firstName">Test Type</label>                                               
+                                                            <select class="form-control" id="TestType" name="TestType">
+                                                                <option>G</option>
+                                                                <option>G2</option>
+                                                              </select> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+
+                                            <div class="card mt-4">
+                                                <div class="card-header">
+                                                    Personal Information
+                                                </div>
+
+                                                <div class="card-body">
+                                                   
+                                                    <div class="form-group">
+                                                        <label for="firstName">First Name</label>
+                                                        <input type="text" class="form-control" id="firstName"
+                                                            name="firstName" placeholder="Enter first name"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.firstName : '' %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="lastName">Last Name</label>
+                                                        <input type="text" class="form-control" id="lastName"
+                                                            name="lastName" placeholder="Enter last name"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.lastName : '' %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="licenseNumber">License Number (8 characters)</label>
+                                                        <input type="text" class="form-control" id="licenseNumber"
+                                                            name="licenseNumber" maxlength="8"
+                                                            placeholder="Enter license number DL123456">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="age">Age</label>
+                                                        <input type="number" class="form-control" id="age" name="age"
+                                                            placeholder="Enter age"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.age : '' %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="dob">Date of Birth</label>
+                                                        <input type="date" class="form-control" id="dob" name="dob">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Car Information Section -->
+                                            <div class="card mt-4">
+                                                <div class="card-header">
+                                                    Car Information
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <div class="form-group">
+                                                        <label for="make">Make</label>
+                                                        <input type="text" class="form-control" id="make" name="make"
+                                                            placeholder="Enter car make"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.car_details.make : '' %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="model">Model</label>
+                                                        <input type="text" class="form-control" id="model" name="model"
+                                                            placeholder="Enter car model"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.car_details.model : '' %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="year">Year</label>
+                                                        <input type="number" class="form-control" id="year" name="year"
+                                                            placeholder="Enter car year"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.car_details.year : '' %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="plateNumber">Plate Number</label>
+                                                        <input type="text" class="form-control" id="plateNumber"
+                                                            name="plateno"
+                                                            placeholder="Enter car plate number ex: AA12AAA"
+                                                            value="<%= typeof g2Data !=='undefined' ? g2Data.car_details.platno : '' %>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="mt-4 mb-2">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                        </form>
+                    </div>
+
+        </main>
+        <!-- Footer-->
+        <%- include('layouts/footer'); %>
+            <!-- Js scripts -->
+            <%- include('layouts/script'); %>
+    </body>
+
+</html>

@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+     <!--Head-->
+    <%- include('layouts/head'); %>
+    <body>  
+        <main>
+             <!-- Navigation -->
+            <%- include('layouts/nav'); %>
+             <!-- Header Banner-->
+            <%- include('layouts/header'); %>
+            <!-- Main Content-->
+             
+            <div class="container mt-5 mb-5">
+                <div class="card mx-auto" >
+                    <div class="card-body">
+                        <p class="text-center text-bold">User Information</p>
+                        
+                        <p>First Name: <%= user.firstName %></p>
+                        <p>Last Name: <%= user.lastName %></p>
+                        <p>License Number: <%= user.licenseNumber %></p>
+                        <p>Age: <%= user.age %></p>
+                        <p>Date of Birth: <%= user.dob %></p>
+                        <p>Make: <%= user.make %></p>
+                        <p>Model: <%= user.model %></p>
+                        <p>Year: <%= user.year %></p>
+                        <p>Plate Number: <%= user.plateno %></p>
+                    </div>
+                </div>
+            </div>
+
+     </main> 
+      <!-- Footer-->
+        <%- include('layouts/footer'); %>
+      <!-- Js scripts -->
+       <%- include('layouts/script'); %>
+    </body>
+</html>
+
+ 
